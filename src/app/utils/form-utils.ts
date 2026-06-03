@@ -1,5 +1,8 @@
 import { AbstractControl, FormArray, FormGroup, ValidationErrors } from '@angular/forms';
 
+async function sleep(){
+  return new Promise(resolve => setTimeout(resolve, 2000));
+}
 export class FormUtils {
   // Expresiones regulares
   static namePattern = '([a-zA-Z]+) ([a-zA-Z]+)';
@@ -20,6 +23,9 @@ export class FormUtils {
 
         case 'email':
           return 'El valor debe de ser un email válido';
+
+        case 'emailTaken':
+          return 'El email ya se encuentra registrado.';
 
         case 'pattern':
           if (errors['pattern'].requiredPattern === FormUtils.emailPattern) {
@@ -74,5 +80,17 @@ export class FormUtils {
 
       return field1Value === field2Value ? null : { passwordsNotEqual: true };
     }
+  }
+
+  static async checkingServerResponse(control: AbstractControl): Promise<ValidationErrors | null> {
+    await sleep();
+    const formValue = control.value;
+
+    if (formValue === 'hola@mundo.com') {
+      return {
+        emailTaken: true
+      }
+    }
+    return null;
   }
 }
