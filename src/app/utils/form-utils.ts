@@ -27,6 +27,9 @@ export class FormUtils {
         case 'emailTaken':
           return 'El email ya se encuentra registrado.';
 
+        case 'notStrider':
+          return 'El username no puede ser "strider".';
+
         case 'pattern':
           if (errors['pattern'].requiredPattern === FormUtils.emailPattern) {
             return 'El campo debe de tener un formato de email válido.';
@@ -92,5 +95,11 @@ export class FormUtils {
       }
     }
     return null;
+  }
+
+  static notStrider(control: AbstractControl): ValidationErrors | null {
+    const value = control.value;
+
+    return value === 'strider' ? { notStrider: true } : null;
   }
 }
