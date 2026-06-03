@@ -50,9 +50,9 @@ export class FormUtils {
     return FormUtils.getTextError(errors);
   }
 
-  static isValidFieldInArray(formArray: FormArray, index: number) {
+  static isValidFieldInArray(formArray: FormArray, index: number): boolean {
     return (
-      formArray.controls[index].errors && formArray.controls[index].touched
+      !!formArray.controls[index].errors && formArray.controls[index].touched
     );
   }
 
@@ -67,5 +67,3 @@ export class FormUtils {
     return FormUtils.getTextError(errors);
   }
 }
-
-// FormUtils.isValidField()
