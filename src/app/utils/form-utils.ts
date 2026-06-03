@@ -2,6 +2,9 @@ import { FormArray, FormGroup, ValidationErrors } from '@angular/forms';
 
 export class FormUtils {
   // Expresiones regulares
+  static namePattern = '([a-zA-Z]+) ([a-zA-Z]+)';
+  static emailPattern = '^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$';
+  static notOnlySpacesPattern = '^[a-zA-Z0-9]+$';
 
   static getTextError(errors: ValidationErrors) {
     for (const key of Object.keys(errors)) {
@@ -17,6 +20,16 @@ export class FormUtils {
 
         case 'email':
           return 'El valor debe de ser un email válido';
+
+        case 'pattern':
+          if (errors['pattern'].requiredPattern === FormUtils.emailPattern) {
+            return 'El campo debe de tener un formato de email válido.';
+          }
+
+          return 'Error de patrón contra expresión regular.';
+
+        default:
+          return `Error no controlado: ${key}`;
       }
     }
 
