@@ -43,9 +43,11 @@
       <select formControlName="border" class="form-control">
         <option value="">-- Seleccione la frontera --</option>
 
-        <!-- <option [value]="country.cca3">
-          {{ country.name }}
-        </option> -->
+        @for (country of borders(); track country){
+          <option [value]="country.cca3">
+            {{ country.name.common }}
+          </option>
+        }
       </select>
     </div>
   </div>
