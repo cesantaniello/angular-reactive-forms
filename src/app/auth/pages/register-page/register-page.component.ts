@@ -30,8 +30,4 @@ export class RegisterPageComponent {
 
 
 
-  onSubmit() {
-    this.myForm.markAllAsTouched();
-    console.log(this.myForm.value);
-  }
 }
