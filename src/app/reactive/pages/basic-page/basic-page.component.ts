@@ -1,5 +1,5 @@
 import { JsonPipe } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -23,6 +23,8 @@ export class BasicPageComponent {
     price: [0, [Validators.required, Validators.min(10)]],
     inStorage: [0, [Validators.required, Validators.min(0)]],
   });
+
+  savedProducts = signal<{ name: string; price: number; inStorage: number }[]>([]);
 
   // myForm2 = new FormGroup({
   //   name: new FormControl('', [], []),
@@ -58,13 +60,17 @@ export class BasicPageComponent {
   //   return null;
   // }
 
+  onDelete(index: number) {
+    this.savedProducts.update(products => products.filter((_, i) => i !== index));
+  }
+
   onSave() {
     if (this.myForm.invalid) {
       this.myForm.markAllAsTouched();
       return;
     }
 
-    console.log(this.myForm.value);
+    this.savedProducts.update(products => [...products, this.myForm.value]);
 
     this.myForm.reset({
       price: 0,

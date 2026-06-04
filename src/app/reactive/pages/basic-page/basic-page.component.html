@@ -71,6 +71,22 @@
   </div>
 </div>
 
+<div class="row mt-4">
+  <div class="col">
+    <h5>Productos guardados</h5>
+    @for (product of savedProducts(); track $index) {
+    <div class="d-flex align-items-center justify-content-between border rounded p-2 mb-2">
+      <pre class="mb-0">{{ product | json }}</pre>
+      <button type="button" class="btn btn-danger btn-sm ms-3" (click)="onDelete($index)">
+        Eliminar
+      </button>
+    </div>
+    } @empty {
+    <p class="text-muted">No hay productos guardados.</p>
+    }
+  </div>
+</div>
+
 <div class="row">
   <div class="col">
     <span>Valid</span>
