@@ -1,7 +1,7 @@
 <h2>Reactivos: <small> Dinámicos </small></h2>
 <hr />
 
-<form autocomplete="off" [formGroup]="myForm" (ngSubmit)="onSubmit()">
+<form autocomplete="off" [formGroup]="myForm">
   <!-- Nombre -->
   <div class="mb-3 row">
     <label class="col-sm-3 col-form-label">Nombre</label>
@@ -76,14 +76,6 @@
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-sm-12">
-      <button type="submit" class="btn btn-primary float-end">
-        <!-- [disabled]="myForm.invalid" -->
-        Guardar
-      </button>
-    </div>
-  </div>
 </form>
 
 <span>Valid</span>
